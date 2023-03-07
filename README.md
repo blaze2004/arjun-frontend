@@ -3,6 +3,10 @@ Arjun is an open source personal assistant designed for WhatsApp users to manage
 
 ## Getting Started
 
+```
+cp .example.env .env.local
+```
+
 First, run the development server:
 
 ```bash
@@ -14,3 +18,6 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Credits
+Website Design Inspired from [precedent.dev](https://precedent.dev)
