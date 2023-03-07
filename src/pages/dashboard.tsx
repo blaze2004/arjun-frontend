@@ -11,8 +11,18 @@ const Dashboard=() => {
         <Layout>
             <main className="flex w-full flex-col items-center justify-center py-32 h-screen">
                 {!session? (
-                    <div className="">
-                        <Auth supabaseClient={supabase} theme="light" onlyThirdPartyProviders={true} providers={["google"]} />
+                    <div className="max-w-xl px-5 xl:px-0 flex-col">
+                        <h1 className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold  text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem]" style={{ opacity: 1, transform: "none" }}>
+                            <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Login</span>
+                        </h1>
+                        <p className="mt-6 text-gray-500 text-decoration-italic" style={{ opacity: 1 }}>
+                            <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Calendar and Google Task permissions are compulsory for Arjun to be able to manage your schedule. We don't do anything with your calendar and only perform operations which you ask Arjun to perform.</span>
+                        </p>
+                        <div className="flex items-center justify-center">
+                            <div className="border border-gray-200 bg-white text-black hover:bg-gray-50 flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none max-w-fit p-2 mt-5">
+                                <Auth supabaseClient={supabase} onlyThirdPartyProviders={true} providers={["google"]} appearance={{ style: { button: { border: 'none' } } }} />
+                            </div>
+                        </div>
                     </div>
                 ):
                     (
