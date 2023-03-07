@@ -1,12 +1,17 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 
 interface ComponentProps {
     children: React.ReactNode;
 }
 
 const Layout: React.FC<ComponentProps>=({ children }) => {
+    const session=useSession();
+    const supabase=useSupabaseClient();
+    const router=useRouter();
     return (
         <div className="bg-gradient-to-br from-indigo-50 to-cyan-100 relative">
             <Head>
@@ -24,7 +29,7 @@ const Layout: React.FC<ComponentProps>=({ children }) => {
                             <p>Arjun</p>
                         </Link>
                         <div>
-                            <Link href="/dashboard" className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black" style={{ opacity: 1 }}>Sign In</Link>
+                            <button onClick={() => (!session? router.push("/dashboard"):supabase.auth.signOut())} className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black" style={{ opacity: 1 }}>{!session? "Sign In":"Logout"}</button>
                         </div>
                     </div>
                 </div>
