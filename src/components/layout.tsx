@@ -37,9 +37,27 @@ const Layout: React.FC<ComponentProps>=({ children }) => {
                 {children}
 
                 <div className="w-full border-t border-gray-200 bg-white py-5 text-center self-end">
-                    <p className="text-gray-500">A personal assistant built by &nbsp;
-                        <a className="font-medium text-gray-800 underline transition-colors" href="https://github.com/blaze2004" target="_blank" rel="noopener noreferrer">Shubham Tiwari</a>
-                    </p>
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center">
+                        <div className="text-center sm:text-left">
+                            <p className="text-sm">
+                                &copy; 2023 Arjun. All rights reserved.
+                            </p>
+                        </div>
+                        <div className="mt-4 sm:mt-0">
+                            <Link
+                                href="/privacy-policy"
+                                className="text-gray-400 hover:text-gray-300 ml-4"
+                            >
+                                Privacy Policy
+                            </Link>
+                            <a
+                                href="mailto:shubhamtiwari06112004+arjun@gmail.com"
+                                className="text-gray-400 hover:text-gray-300 ml-4"
+                            >
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

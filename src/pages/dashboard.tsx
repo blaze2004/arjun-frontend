@@ -2,6 +2,7 @@ import Layout from '@/components/layout';
 import { FaWhatsapp } from 'react-icons/fa';
 import { Auth } from '@supabase/auth-ui-react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Link from 'next/link';
 
 const Dashboard=() => {
     const arjunWhatsAppNumber=process.env.NEXT_PUBLIC_ARJUN_WHATSAPP_NUMBER;
@@ -16,7 +17,8 @@ const Dashboard=() => {
                             <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Login</span>
                         </h1>
                         <p className="mt-6 text-gray-500 text-decoration-italic" style={{ opacity: 1 }}>
-                            <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Calendar and Google Task permissions are compulsory for Arjun to be able to manage your schedule. We don't do anything with your calendar and only perform operations which you ask Arjun to perform.</span>
+                            <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Calendar and Google Task permissions are compulsory for Arjun to be able to manage your schedule. We don&apos;t do anything with your calendar and only perform operations which you ask Arjun to perform.
+                                For more information on how we use you data see our <Link href="/privacy-policy">Privacy Policy</Link></span>
                         </p>
                         <div className="flex items-center justify-center">
                             <div className="border border-gray-200 bg-white text-black hover:bg-gray-50 flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none max-w-fit p-2 mt-5">
