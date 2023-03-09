@@ -46,13 +46,13 @@ const Layout: React.FC<ComponentProps>=({ children }) => {
                         <div className="mt-4 sm:mt-0">
                             <Link
                                 href="/privacy-policy"
-                                className="text-gray-400 hover:text-gray-300 ml-4"
+                                className="text-gray-800 hover:text-gray-300 ml-4"
                             >
                                 Privacy Policy
                             </Link>
                             <a
                                 href="mailto:shubhamtiwari06112004+arjun@gmail.com"
-                                className="text-gray-400 hover:text-gray-300 ml-4"
+                                className="text-gray-800 hover:text-gray-300 ml-4"
                             >
                                 Contact Us
                             </a>
