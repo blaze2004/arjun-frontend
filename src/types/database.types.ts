@@ -30,6 +30,7 @@ export interface Database {
         Row: {
           avatar_url: string|null
           full_name: string|null
+          google_refresh_token: string|null
           id: string
           phone_number: string|null
           updated_at: string|null
@@ -37,6 +38,7 @@ export interface Database {
         Insert: {
           avatar_url?: string|null
           full_name?: string|null
+          google_refresh_token?: string|null
           id: string
           phone_number?: string|null
           updated_at?: string|null
@@ -44,6 +46,7 @@ export interface Database {
         Update: {
           avatar_url?: string|null
           full_name?: string|null
+          google_refresh_token?: string|null
           id?: string
           phone_number?: string|null
           updated_at?: string|null

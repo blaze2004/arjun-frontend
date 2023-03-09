@@ -9,8 +9,7 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 import { Database } from "@/types/database.types";
 import { useRouter } from "next/router";
-
-type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
+import { Profiles, UserProfile } from "@/types";
 
 const Account = ({ session }: { session: Session }) => {
   const arjunWhatsAppNumber = process.env.NEXT_PUBLIC_ARJUN_WHATSAPP_NUMBER;
@@ -23,6 +22,9 @@ const Account = ({ session }: { session: Session }) => {
     null
   );
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [refreshToken, setRefreshToken] = useState<
+    Profiles["google_refresh_token"]
+  >(null);
 
   const router = useRouter();
 
@@ -43,7 +45,7 @@ const Account = ({ session }: { session: Session }) => {
 
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`full_name, phone_number, avatar_url`)
+        .select(`full_name, phone_number, avatar_url, google_refresh_token`)
         .eq("id", user.id)
         .single();
 
@@ -54,6 +56,22 @@ const Account = ({ session }: { session: Session }) => {
       if (data) {
         setPhoneNumber(data.phone_number);
         setFullName(data.full_name);
+
+        if (session.provider_refresh_token != null) {
+          if (data.google_refresh_token !== null) {
+            if (data.google_refresh_token !== session.provider_refresh_token) {
+              setRefreshToken(session.provider_refresh_token);
+              await updateProfile({
+                refreshToken: session.provider_refresh_token
+              });
+            }
+          } else {
+            setRefreshToken(session.provider_refresh_token);
+            await updateProfile({
+              refreshToken: session.provider_refresh_token
+            });
+          }
+        }
       }
     } catch (error) {
       alert("Error loading user data!");
@@ -64,9 +82,11 @@ const Account = ({ session }: { session: Session }) => {
   }
 
   async function updateProfile({
-    phoneNumber
+    phoneNumber,
+    refreshToken
   }: {
-    phoneNumber: Profiles["phone_number"];
+    phoneNumber?: Profiles["phone_number"];
+    refreshToken?: Profiles["google_refresh_token"];
   }) {
     try {
       setLoading(true);
@@ -75,15 +95,29 @@ const Account = ({ session }: { session: Session }) => {
         return;
       }
 
-      const updates = {
-        id: user.id,
-        phone_number: phoneNumber,
-        updated_at: new Date().toISOString()
-      };
+      if (phoneNumber || refreshToken) {
+        const updates: UserProfile = {
+          id: user.id,
+          updated_at: new Date().toISOString()
+        };
 
-      let { error } = await supabase.from("profiles").upsert(updates);
-      if (error) throw error;
-      alert("Profile updated!");
+        if (phoneNumber !== null && phoneNumber !== undefined) {
+          updates.phone_number = phoneNumber;
+        }
+
+        if (refreshToken !== null && refreshToken !== undefined) {
+          updates.google_refresh_token = refreshToken;
+        }
+
+        let { error } = await supabase.from("profiles").upsert(updates);
+        if (error) throw error;
+        if (phoneNumber != undefined && phoneNumber != null) {
+          alert("Profile updated!");
+        }
+      } else {
+        console.log("Nothing to update");
+        return;
+      }
     } catch (error) {
       alert("Error updating the data!");
       console.log(error);
