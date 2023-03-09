@@ -10,7 +10,7 @@ const LandingPage=() => {
             <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Your Personal Assistant On WhatsApp</span>
           </h1>
           <p className="mt-6 text-center text-gray-500 md:text-xl" style={{ opacity: 1 }}>
-            <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Manage your schedule from WhatsApp by chatting with Arjun.</span>
+            <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Manage your schedule from WhatsApp by chatting with Arjun.<br />Arjun is currently in Alpha phase and might give wrong responses.</span>
           </p>
           <div className="mx-auto mt-6 flex items-center justify-center space-x-5" style={{ opacity: 1, transform: "none" }}>
             <Link
