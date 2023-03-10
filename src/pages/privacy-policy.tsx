@@ -3,7 +3,7 @@ import Layout from "@/components/layout";
 const PrivacyPolicy=() => {
     return (
         <Layout>
-            <main className="flex w-full flex-col items-center justify-center px-5 py-32 h-screen">
+            <main className="flex w-full flex-col items-center justify-center px-5 py-32">
                 <div className='max-w-xl px-5 xl:px-0'>
                     <h1 className="bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display text-4xl font-bold  text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem]" style={{ opacity: 1, transform: "none" }}>
                         <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Privacy Policy</span>
