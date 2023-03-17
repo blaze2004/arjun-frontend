@@ -4,6 +4,7 @@ import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import Loading from "../components/loading";
 
 function MyApp({
@@ -39,7 +40,13 @@ function MyApp({
       supabaseClient={supabase}
       initialSession={pageProps.initialSession}
     >
-      {isLoading ? <Loading /> : <Component {...pageProps} />}
+      {isLoading ?
+        <Loading /> :
+        <>
+          <Component {...pageProps} />
+          {/* <Script async src="https://cdnjs.waitlistpanda.com/embed/web/index.min.js" defer></Script> */}
+        </>
+      }
     </SessionContextProvider>
   );
 }

@@ -14,10 +14,10 @@ const LandingPage=() => {
           </p>
           <div className="mx-auto mt-6 flex items-center justify-center space-x-5" style={{ opacity: 1, transform: "none" }}>
             <Link
-              href="/dashboard"
+              href="https://form.waitlistpanda.com/go/OUX9PACcT4P8hGW8uztt"
               className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
             >
-              Get started
+              Join the waitlist
             </Link>
           </div>
         </div>
