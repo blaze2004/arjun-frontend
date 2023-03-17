@@ -22,10 +22,6 @@ const Dashboard = () => {
 
   const [isWaitlistedUser, setIsWaitlistedUser] = useState<boolean>(false);
 
-  useEffect(() => {
-    isWaitlisted();
-  }, [session]);
-
   const isWaitlisted = async () => {
     try {
       if (!session) {
@@ -52,6 +48,10 @@ const Dashboard = () => {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    isWaitlisted();
+  }, [session, isWaitlisted]);
 
   return (
     <Layout>
@@ -121,7 +121,7 @@ const Dashboard = () => {
                       maxWidth: "541px"
                     }}
                   >
-                    You don't have access to Arjun yet. Join the waitlist to enjoy the superpowers of arjun.
+                    You don&apos;t have access to Arjun yet. Join the waitlist to enjoy the superpowers of arjun.
                   </span>
                 </p>
                 <div className="flex items-center justify-center">

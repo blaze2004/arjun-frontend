@@ -32,7 +32,7 @@ const Account = ({ session }: { session: Session }) => {
     () => {
       getProfile();
     },
-    [session]
+    [session, getProfile]
   );
 
   async function getProfile() {
