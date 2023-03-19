@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Image from 'next/image';
 
 interface ComponentProps {
     children: ReactNode;
@@ -43,7 +44,7 @@ const Layout: FC<ComponentProps> = ({ children }) => {
                 <div className={`fixed top-0 w-full ${isScrolled ? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl' : 'bg-white/0'} z-30 transition-all`}>
                     <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
                         <Link className="flex items-center font-display text-2xl" href="/">
-                            {/* <img alt="Arjun logo" src="/logo.svg" decoding="async" className="mr-2 rounded-sm" loading="lazy" style={{ color: 'transparent' }} /> */}
+                            <Image alt="Arjun logo" src="/logo.png" className="mr-2 rounded-sm" height={30} width={30} loading="lazy" style={{ color: 'transparent' }} />
                             <p>Arjun</p>
                         </Link>
                         <div>
