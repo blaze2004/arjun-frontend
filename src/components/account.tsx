@@ -157,7 +157,7 @@ const Account = ({ session }: { session: Session }) => {
   return (
     <div className="max-w-xl px-5 xl:px-0">
       <h1
-        className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold  text-transparent drop-shadow-sm md:text-5xl md:leading-[5rem]"
+        className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-3xl font-bold  text-transparent drop-shadow-sm md:text-5xl md:leading-[5rem]"
         style={{ opacity: 1, transform: "none" }}
       >
         <span
@@ -168,7 +168,7 @@ const Account = ({ session }: { session: Session }) => {
             maxWidth: "541px"
           }}
         >
-          Hi {fullName || "There"},
+          Hi {fullName || "There"}
         </span>
       </h1>
       <p
@@ -190,7 +190,7 @@ const Account = ({ session }: { session: Session }) => {
         <label className="block text-gray-700 font-bold mb-2">
           Your phone number
         </label>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-5 flex-col sm:flex-row">
           <PhoneInput
             country={"us"}
             value={phoneNumber}

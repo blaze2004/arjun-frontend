@@ -9,7 +9,7 @@ const LandingPage = () => {
 
   const opts = {
     height: '200',
-    width: 'smallScreen' ? '400' : '600',
+    width: '100%',
     playerVars: {
       autoplay: 1,
       loop: 1,
@@ -25,7 +25,7 @@ const LandingPage = () => {
             <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Your Personal Assistant On WhatsApp</span>
           </h1>
           <div className="mt-5 flex justify-center items-center mb-8 mt-8">
-            <div className="bg-black rounded-lg max-w-max-content h-400px w-600px sm:w-400px">
+            <div className="bg-black rounded-lg max-w-max-content h-200 w-2/3 max-w-xl">
               <YouTube
                 title="Arjun Demo"
                 videoId="MVBQqYsqjJQ"
