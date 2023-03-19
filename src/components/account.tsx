@@ -190,7 +190,7 @@ const Account = ({ session }: { session: Session }) => {
         <label className="block text-gray-700 font-bold mb-2">
           Your phone number
         </label>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-1">
           <PhoneInput
             country={"us"}
             value={phoneNumber}
