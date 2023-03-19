@@ -1,17 +1,36 @@
-import React from 'react';
+import { ReactNode, FC, useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Image from 'next/image';
 
 interface ComponentProps {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
-const Layout: React.FC<ComponentProps>=({ children }) => {
-    const session=useSession();
-    const supabase=useSupabaseClient();
-    const router=useRouter();
+const Layout: FC<ComponentProps> = ({ children }) => {
+    const session = useSession();
+    const supabase = useSupabaseClient();
+    const router = useRouter();
+
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            if (scrollTop > 0) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+        document.addEventListener("scroll", handleScroll);
+        return () => {
+            document.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     return (
         <div className="bg-gradient-to-br from-indigo-50 to-cyan-100 relative">
             <Head>
@@ -22,14 +41,14 @@ const Layout: React.FC<ComponentProps>=({ children }) => {
             <div className='fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100'></div>
 
             <div className='absolute w-full h-screen bg-transparent'>
-                <div className="fixed top-0 w-full bg-white/0 z-30 transition-all">
+                <div className={`fixed top-0 w-full ${isScrolled ? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl' : 'bg-white/0'} z-30 transition-all`}>
                     <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
                         <Link className="flex items-center font-display text-2xl" href="/">
-                            {/* <img alt="Arjun logo" src="/logo.svg" decoding="async" className="mr-2 rounded-sm" loading="lazy" style={{ color: 'transparent' }} /> */}
+                            <Image alt="Arjun logo" src="/logo.png" className="mr-2 rounded-sm" height={30} width={30} loading="lazy" style={{ color: 'transparent' }} />
                             <p>Arjun</p>
                         </Link>
                         <div>
-                            <button onClick={() => (!session? router.push("/dashboard"):supabase.auth.signOut())} className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black" style={{ opacity: 1 }}>{!session? "Sign In":"Logout"}</button>
+                            <button onClick={() => (!session ? router.push("/dashboard") : supabase.auth.signOut())} className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black" style={{ opacity: 1 }}>{!session ? "Sign In" : "Logout"}</button>
                         </div>
                     </div>
                 </div>
@@ -46,17 +65,34 @@ const Layout: React.FC<ComponentProps>=({ children }) => {
                         <div className="mt-4 sm:mt-0">
                             <Link
                                 href="/privacy-policy"
-                                className="text-gray-800 hover:text-gray-300 ml-4"
+                                className="text-gray-800 hover:text-gray-500 ml-4"
                             >
                                 Privacy Policy
                             </Link>
+                            <Link
+                                href="/changelog"
+                                className="text-gray-800 hover:text-gray-500 ml-4"
+                            >
+                                Changelog
+                            </Link>
                             <a
-                                href="mailto:shubhamtiwari06112004+arjun@gmail.com"
-                                className="text-gray-800 hover:text-gray-300 ml-4"
+                                href="mailto:shubham@visualbrahma.tech"
+                                className="text-gray-800 hover:text-gray-500 ml-4"
                             >
                                 Contact Us
                             </a>
                         </div>
+                    </div>
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+                        <p className="text-sm">
+                            Design inspired from
+                        </p>
+                        <Link
+                            href="https://precedent.dev"
+                            className="text-blue-800 hover:text-blue-500 ml-1"
+                        >
+                            precedent.dev
+                        </Link>
                     </div>
                 </div>
             </div>
