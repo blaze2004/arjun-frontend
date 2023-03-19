@@ -25,7 +25,7 @@ const LandingPage = () => {
             <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Your Personal Assistant On WhatsApp</span>
           </h1>
           <div className="mt-5 flex justify-center items-center mb-8 mt-8">
-            <div className="bg-black rounded-lg max-w-max-content h-200 w-2/3 max-w-xl">
+            <div className="bg-black rounded-lg max-w-max-content h-200 max-w-xl p-1 sm:w-3/4">
               <YouTube
                 title="Arjun Demo"
                 videoId="MVBQqYsqjJQ"
