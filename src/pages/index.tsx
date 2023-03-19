@@ -1,7 +1,11 @@
 import Layout from '@/components/layout';
+import { useSession } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
+import waitlist from '@zootools/waitlist-js';
 
-const LandingPage=() => {
+const LandingPage = () => {
+  const session = useSession();
+
   return (
     <Layout>
       <main className="flex w-full flex-col items-center justify-center py-32 h-screen">
@@ -13,12 +17,23 @@ const LandingPage=() => {
             <span style={{ display: 'inline-block', verticalAlign: 'top', textDecoration: 'inherit', maxWidth: '541px' }}>Manage your schedule from WhatsApp by chatting with Arjun.<br />Arjun is currently in Alpha phase and might give wrong responses.</span>
           </p>
           <div className="mx-auto mt-6 flex items-center justify-center space-x-5" style={{ opacity: 1, transform: "none" }}>
-            <Link
-              href="https://form.waitlistpanda.com/go/OUX9PACcT4P8hGW8uztt"
-              className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
-            >
-              Join the waitlist
-            </Link>
+            {!session ? (
+              <button
+                onClick={() => waitlist.openPopup("OUX9PACcT4P8hGW8uztt")}
+                className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
+              >
+                Join the waitlist
+              </button>
+            ) :
+              (
+                <Link
+                  href="/dashboard"
+                  className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
+                >
+                  Get Started
+                </Link>
+              )
+            }
           </div>
         </div>
       </main>

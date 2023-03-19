@@ -12,17 +12,17 @@ export interface Database {
       api_keys: {
         Row: {
           id: number
-          key: string
+          key: string | null
           owner: string | null
         }
         Insert: {
           id?: number
-          key: string
+          key?: string | null
           owner?: string | null
         }
         Update: {
           id?: number
-          key?: string
+          key?: string | null
           owner?: string | null
         }
       }
@@ -34,6 +34,7 @@ export interface Database {
           id: string
           phone_number: string | null
           updated_at: string | null
+          waitlist_status: boolean
         }
         Insert: {
           avatar_url?: string | null
@@ -42,6 +43,7 @@ export interface Database {
           id: string
           phone_number?: string | null
           updated_at?: string | null
+          waitlist_status?: boolean
         }
         Update: {
           avatar_url?: string | null
@@ -50,23 +52,7 @@ export interface Database {
           id?: string
           phone_number?: string | null
           updated_at?: string | null
-        }
-      }
-      Testers: {
-        Row: {
-          created_at: string | null
-          email: string | null
-          id: number
-        }
-        Insert: {
-          created_at?: string | null
-          email?: string | null
-          id?: number
-        }
-        Update: {
-          created_at?: string | null
-          email?: string | null
-          id?: number
+          waitlist_status?: boolean
         }
       }
       user_sessions: {

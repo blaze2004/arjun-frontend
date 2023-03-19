@@ -1,11 +1,9 @@
 import Layout from "@/components/layout";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSession } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import Account from "@/components/account";
 import GoogleButton from "react-google-button";
 import { useRouter } from "next/router";
-import { Database } from "@/types/database.types";
-import { useEffect, useState } from "react";
 
 const Dashboard = () => {
   const session = useSession();
@@ -18,40 +16,6 @@ const Dashboard = () => {
     "https://www.googleapis.com/auth/userinfo.profile"
   ];
   const router = useRouter();
-  const supabase = useSupabaseClient<Database>();
-
-  const [isWaitlistedUser, setIsWaitlistedUser] = useState<boolean>(false);
-
-  const isWaitlisted = async () => {
-    try {
-      if (!session) {
-        return;
-      }
-
-      let { data, error, status } = await supabase
-        .from("Testers")
-        .select(`email`)
-        .eq("email", session.user.email)
-        .single();
-
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        setIsWaitlistedUser(true);
-        return;
-      }
-      return;
-    } catch (error) {
-      alert("Error loading user data!");
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    isWaitlisted();
-  }, [session, isWaitlisted]);
 
   return (
     <Layout>
@@ -97,43 +61,14 @@ const Dashboard = () => {
                 <GoogleButton
                   onClick={() =>
                     router.push(
-                      `${process.env
-                        .NEXT_PUBLIC_SUPABASE_URL}/auth/v1/authorize?provider=google&scopes=${scopes.join(
-                          " "
-                        )}&redirect_to=${location.protocol}//${location.host}/dashboard&prompt=consent&access_type=offline`
+                      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/authorize?provider=google&scopes=${scopes.join(" ")}&redirect_to=${location.protocol}//${location.host}/dashboard&prompt=consent&access_type=offline`
                     )}
                 />
               </div>
             </div>
           </div>
-          : (isWaitlistedUser ? <Account session={session} /> :
-            (
-              <div className="max-w-xl px-5 xl:px-0 flex-col">
-                <p
-                  className="mt-6 text-gray-500 text-decoration-italic"
-                  style={{ opacity: 1 }}
-                >
-                  <span
-                    style={{
-                      display: "inline-block",
-                      verticalAlign: "top",
-                      textDecoration: "inherit",
-                      maxWidth: "541px"
-                    }}
-                  >
-                    You don&apos;t have access to Arjun yet. Join the waitlist to enjoy the superpowers of arjun.
-                  </span>
-                </p>
-                <div className="flex items-center justify-center">
-                  <Link
-                    href="https://form.waitlistpanda.com/go/OUX9PACcT4P8hGW8uztt"
-                    className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
-                  >
-                    Join the waitlist
-                  </Link>
-                </div>
-              </div>
-            ))}
+          : <Account session={session} />
+        }
       </main>
     </Layout>
   );

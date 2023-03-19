@@ -8,3 +8,8 @@ export interface UserProfile {
     google_refresh_token?: string;
     updated_at: string;
 }
+
+export interface Updates {
+    date: string;
+    content: string[];
+}
