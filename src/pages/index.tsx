@@ -28,7 +28,7 @@ const LandingPage = () => {
             <div className="bg-black rounded-lg max-w-max-content h-200 max-w-xl p-1 sm:w-3/4">
               <YouTube
                 title="Arjun Demo"
-                videoId="MVBQqYsqjJQ"
+                videoId="0Lc6zvPIId4"
                 opts={opts}
                 onReady={() => { }}
               />
