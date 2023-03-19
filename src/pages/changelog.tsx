@@ -28,7 +28,9 @@ const Changelog = () => {
             date: "19 March 2023",
             content: [
                 "Mobile frendly website.",
-                ""
+                "Added a demo on video for easy onboarding.",
+                "Arjun now returns events as well from the calendar.",
+                "Now you can see tasks and events of any date in chat."
             ]
         }
     ]
