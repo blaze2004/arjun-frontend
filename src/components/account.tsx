@@ -1,6 +1,6 @@
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Session,
   useSupabaseClient,
@@ -12,22 +12,22 @@ import { useRouter } from "next/router";
 import { Profiles, UserProfile } from "@/types";
 import waitlist from '@zootools/waitlist-js';
 
-const Account = ({ session }: { session: Session }) => {
-  const arjunWhatsAppNumber = process.env.NEXT_PUBLIC_ARJUN_WHATSAPP_NUMBER;
+const Account=({ session }: { session: Session }) => {
+  const arjunWhatsAppNumber=process.env.NEXT_PUBLIC_ARJUN_WHATSAPP_NUMBER;
 
-  const supabase = useSupabaseClient<Database>();
-  const user = useUser();
-  const [fullName, setFullName] = useState<Profiles["full_name"]>(null);
-  const [phoneNumber, setPhoneNumber] = useState<Profiles["phone_number"]>(
+  const supabase=useSupabaseClient<Database>();
+  const user=useUser();
+  const [fullName, setFullName]=useState<Profiles["full_name"]>(null);
+  const [phoneNumber, setPhoneNumber]=useState<Profiles["phone_number"]>(
     null
   );
-  const [editMode, setEditMode] = useState<boolean>(false);
-  const [refreshToken, setRefreshToken] = useState<
+  const [editMode, setEditMode]=useState<boolean>(false);
+  const [refreshToken, setRefreshToken]=useState<
     Profiles["google_refresh_token"]
   >(null);
-  const [waitlistStatus, setWaitlistStatus] = useState<Profiles["waitlist_status"]>(false);
+  const [waitlistStatus, setWaitlistStatus]=useState<Profiles["waitlist_status"]>(false);
 
-  const router = useRouter();
+  const router=useRouter();
 
   useEffect(
     () => {
@@ -36,20 +36,20 @@ const Account = ({ session }: { session: Session }) => {
     [session, getProfile]
   );
 
-  async function getProfile() {
+  const getProfile=useCallback(async () => {
     try {
       if (!user) {
         router.push("/");
         return;
       }
 
-      let { data, error, status } = await supabase
+      let { data, error, status }=await supabase
         .from("profiles")
         .select(`full_name, phone_number, avatar_url, google_refresh_token, waitlist_status`)
         .eq("id", user.id)
         .single();
 
-      if (error && status !== 406) {
+      if (error&&status!==406) {
         throw error;
       }
 
@@ -58,9 +58,9 @@ const Account = ({ session }: { session: Session }) => {
         setFullName(data.full_name);
         setWaitlistStatus(data.waitlist_status);
 
-        if (session.provider_refresh_token != null) {
-          if (data.google_refresh_token !== null) {
-            if (data.google_refresh_token !== session.provider_refresh_token) {
+        if (session.provider_refresh_token!=null) {
+          if (data.google_refresh_token!==null) {
+            if (data.google_refresh_token!==session.provider_refresh_token) {
               setRefreshToken(session.provider_refresh_token);
               await updateProfile({
                 refreshToken: session.provider_refresh_token
@@ -78,7 +78,7 @@ const Account = ({ session }: { session: Session }) => {
       alert("Error loading user data!");
       console.log(error);
     }
-  }
+  }, []);
 
   async function updateProfile({
     phoneNumber,
@@ -93,23 +93,23 @@ const Account = ({ session }: { session: Session }) => {
         return;
       }
 
-      if (phoneNumber || refreshToken) {
-        const updates: UserProfile = {
+      if (phoneNumber||refreshToken) {
+        const updates: UserProfile={
           id: user.id,
           updated_at: new Date().toISOString()
         };
 
-        if (phoneNumber !== null && phoneNumber !== undefined) {
-          updates.phone_number = phoneNumber;
+        if (phoneNumber!==null&&phoneNumber!==undefined) {
+          updates.phone_number=phoneNumber;
         }
 
-        if (refreshToken !== null && refreshToken !== undefined) {
-          updates.google_refresh_token = refreshToken;
+        if (refreshToken!==null&&refreshToken!==undefined) {
+          updates.google_refresh_token=refreshToken;
         }
 
-        let { error } = await supabase.from("profiles").upsert(updates);
+        let { error }=await supabase.from("profiles").upsert(updates);
         if (error) throw error;
-        if (phoneNumber != undefined && phoneNumber != null) {
+        if (phoneNumber!=undefined&&phoneNumber!=null) {
           alert("Profile updated!");
         }
       } else {
@@ -168,7 +168,7 @@ const Account = ({ session }: { session: Session }) => {
             maxWidth: "541px"
           }}
         >
-          Hi {fullName || "There"}
+          Hi {fullName||"There"}
         </span>
       </h1>
       <p
@@ -202,10 +202,10 @@ const Account = ({ session }: { session: Session }) => {
           />
           <button
             onClick={() =>
-              editMode ? updateProfile({ phoneNumber }) : setEditMode(true)}
+              editMode? updateProfile({ phoneNumber }):setEditMode(true)}
             className="rounded-full border border-black bg-white p-1.5 px-4 text-sm text-black transition-all hover:bg-black hover:text-white self-center"
           >
-            {editMode ? "Save" : "Edit"}
+            {editMode? "Save":"Edit"}
           </button>
         </div>
       </div>
