@@ -83,7 +83,7 @@ const Layout: FC<ComponentProps> = ({ children }) => {
                             </a>
                         </div>
                     </div>
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center sm:justify-center">
                         <p className="text-sm">
                             Design inspired from
                         </p>
