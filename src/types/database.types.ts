@@ -34,7 +34,6 @@ export interface Database {
           id: string
           phone_number: string | null
           updated_at: string | null
-          waitlist_status: boolean
         }
         Insert: {
           avatar_url?: string | null
@@ -43,7 +42,6 @@ export interface Database {
           id: string
           phone_number?: string | null
           updated_at?: string | null
-          waitlist_status?: boolean
         }
         Update: {
           avatar_url?: string | null
@@ -52,7 +50,23 @@ export interface Database {
           id?: string
           phone_number?: string | null
           updated_at?: string | null
-          waitlist_status?: boolean
+        }
+      }
+      testers: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: number
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: number
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: number
         }
       }
       user_sessions: {

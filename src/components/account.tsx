@@ -9,8 +9,8 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 import { Database } from "@/types/database.types";
 import { useRouter } from "next/router";
-import { Profiles, UserProfile } from "@/types";
-import waitlist from '@zootools/waitlist-js';
+import { Profiles, UserProfile, Testers } from "@/types";
+import waitlist from "@zootools/waitlist-js";
 
 const Account = ({ session }: { session: Session }) => {
   const arjunWhatsAppNumber = process.env.NEXT_PUBLIC_ARJUN_WHATSAPP_NUMBER;
@@ -25,7 +25,7 @@ const Account = ({ session }: { session: Session }) => {
   const [refreshToken, setRefreshToken] = useState<
     Profiles["google_refresh_token"]
   >(null);
-  const [waitlistStatus, setWaitlistStatus] = useState<Profiles["waitlist_status"]>(false);
+  const [waitlistStatus, setWaitlistStatus] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -43,9 +43,27 @@ const Account = ({ session }: { session: Session }) => {
         return;
       }
 
+      let waitlistQuery = await supabase
+        .from("testers")
+        .select(`email`)
+        .eq("email", session.user.email)
+        .single();
+
+      if (waitlistQuery.error && waitlistQuery.status !== 406) {
+        throw waitlistQuery.error;
+      }
+
+      if (waitlistQuery.data) {
+        setWaitlistStatus(true);
+      } else {
+        return;
+      }
+
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`full_name, phone_number, avatar_url, google_refresh_token, waitlist_status`)
+        .select(
+          `full_name, phone_number, avatar_url, google_refresh_token`
+        )
         .eq("id", user.id)
         .single();
 
@@ -56,7 +74,6 @@ const Account = ({ session }: { session: Session }) => {
       if (data) {
         setPhoneNumber(data.phone_number);
         setFullName(data.full_name);
-        setWaitlistStatus(data.waitlist_status);
 
         if (session.provider_refresh_token != null) {
           if (data.google_refresh_token !== null) {
@@ -139,7 +156,11 @@ const Account = ({ session }: { session: Session }) => {
               maxWidth: "541px"
             }}
           >
-            We apologize, but at this time you do not have access to Arjun. However, we would be happy to add you to our waitlist to gain access to the superpowers of Arjun. If you have already joined the waitlist, kindly await our email notification. Thank you for your patience and understanding.
+            We apologize, but at this time you do not have access to Arjun.
+            However, we would be happy to add you to our waitlist to gain access
+            to the superpowers of Arjun. If you have already joined the
+            waitlist, kindly await our email notification. Thank you for your
+            patience and understanding.
           </span>
         </p>
         <div className="flex items-center justify-center">
