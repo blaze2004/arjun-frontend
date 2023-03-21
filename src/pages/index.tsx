@@ -28,7 +28,7 @@ const LandingPage = () => {
           </h1>
           <div className="mt-5 flex justify-center items-center mb-8 mt-8">
             <div className="bg-black rounded-lg max-w-max-content h-200 max-w-xl p-1 sm:w-3/4">
-              <iframe width="100%" height="300" src="https://www.youtube.com/embed/0Lc6zvPIId4" title="Arjun - The AI Powered WhatsApp Bot for Easy Schedule Management | Learn How to Use" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe width="100%" height="300" src="https://www.youtube.com/embed/0Lc6zvPIId4" title="Arjun - The AI Powered WhatsApp Bot for Easy Schedule Management | Learn How to Use" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
           </div>
           <p
