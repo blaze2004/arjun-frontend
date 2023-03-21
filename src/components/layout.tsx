@@ -9,17 +9,17 @@ interface ComponentProps {
     children: ReactNode;
 }
 
-const Layout: FC<ComponentProps> = ({ children }) => {
-    const session = useSession();
-    const supabase = useSupabaseClient();
-    const router = useRouter();
+const Layout: FC<ComponentProps>=({ children }) => {
+    const session=useSession();
+    const supabase=useSupabaseClient();
+    const router=useRouter();
 
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrolled, setIsScrolled]=useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollTop = window.scrollY;
-            if (scrollTop > 0) {
+        const handleScroll=() => {
+            const scrollTop=window.scrollY;
+            if (scrollTop>0) {
                 setIsScrolled(true);
             } else {
                 setIsScrolled(false);
@@ -41,14 +41,14 @@ const Layout: FC<ComponentProps> = ({ children }) => {
             <div className='fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100'></div>
 
             <div className='absolute w-full h-screen bg-transparent'>
-                <div className={`fixed top-0 w-full ${isScrolled ? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl' : 'bg-white/0'} z-30 transition-all`}>
+                <div className={`fixed top-0 w-full ${isScrolled? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl':'bg-white/0'} z-30 transition-all`}>
                     <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
                         <Link className="flex items-center font-display text-2xl" href="/">
                             <Image alt="Arjun logo" src="/logo.png" className="mr-2 rounded-sm" height={30} width={30} loading="lazy" style={{ color: 'transparent' }} />
                             <p>Arjun</p>
                         </Link>
                         <div>
-                            <button onClick={() => (!session ? router.push("/dashboard") : supabase.auth.signOut())} className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black" style={{ opacity: 1 }}>{!session ? "Sign In" : "Logout"}</button>
+                            <button onClick={() => (!session? router.push("/dashboard"):supabase.auth.signOut())} className='button-1' style={{ opacity: 1 }}>{!session? "Sign In":"Logout"}</button>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@ const Layout: FC<ComponentProps> = ({ children }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Layout;
