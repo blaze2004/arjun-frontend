@@ -2,20 +2,9 @@ import Layout from '@/components/layout';
 import { useSession } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
 import waitlist from '@zootools/waitlist-js';
-import YouTube from 'react-youtube';
 
 const LandingPage = () => {
   const session = useSession();
-
-  const opts = {
-    height: '200',
-    width: '100%',
-    playerVars: {
-      autoplay: 1,
-      loop: 1,
-      modestbranding: 1,
-    },
-  };
 
   return (
     <Layout>
