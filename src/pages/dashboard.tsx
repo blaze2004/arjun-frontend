@@ -22,7 +22,7 @@ const Dashboard = () => {
       <main className='flex w-full flex-col items-center justify-center py-32 h-screen'>
         {!session ? (
           <div className='flex items-center px-5 xl:px-0 text-center flex-col'>
-            <p className='bg-gradient-to-br mb-3 from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold text-transparent drop-shadow-sm md:text-6xl'>
+            <p className='bg-gradient-to-br mb-5 from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold text-transparent drop-shadow-sm md:text-6xl'>
               Please login first
             </p>
             <p className='mt-6 text-gray-500 w-[50%] text-sm lg:text-xl text-decoration-italic'>
@@ -32,7 +32,7 @@ const Dashboard = () => {
               perform.
             </p>
             <div className='rounded-full mb-4 text-center py-0.5 px-5 mt-5 mx-2 text-[12px] lg:text-sm ring-1 ring-blue-500'>
-              For more information on how we use you data see our{' '}
+              For more information on how we use your data see our{' '}
               <Link className='text-blue-600 underline' href='/privacy-policy'>
                 Privacy Policy
               </Link>
