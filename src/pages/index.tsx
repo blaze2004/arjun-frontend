@@ -1,7 +1,22 @@
 import Layout from '@/components/layout';
+import { useSession } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
+import waitlist from '@zootools/waitlist-js';
+import YouTube from 'react-youtube';
 
 const LandingPage = () => {
+  const session = useSession();
+
+  const opts = {
+    height: '200',
+    width: '100%',
+    playerVars: {
+      autoplay: 1,
+      loop: 1,
+      modestbranding: 1,
+    },
+  };
+
   return (
     <Layout>
       <main className='flex w-full flex-col items-center justify-center py-32 h-screen'>
@@ -11,6 +26,16 @@ const LandingPage = () => {
           >
               Your Personal Assistant <br/> On WhatsApp
           </h1>
+          <div className="mt-5 flex justify-center items-center mb-8 mt-8">
+            <div className="bg-black rounded-lg max-w-max-content h-200 max-w-xl p-1 sm:w-3/4">
+              <YouTube
+                title="Arjun Demo"
+                videoId="0Lc6zvPIId4"
+                opts={opts}
+                onReady={() => { }}
+              />
+            </div>
+          </div>
           <p
             className='text-center text-gray-500 mx-2 md:text-xl'
           >
@@ -24,9 +49,23 @@ const LandingPage = () => {
             className='mx-auto mt-6 flex items-center justify-center space-x-5'
             style={{ opacity: 1, transform: 'none' }}
           >
-            <Link href='/dashboard' className='button-2'>
-              Get started
-            </Link>
+            {!session ? (
+              <button
+                onClick={() => waitlist.openPopup("OUX9PACcT4P8hGW8uztt")}
+                className="button-2"
+              >
+                Join the waitlist
+              </button>
+            ) :
+              (
+                <Link
+                  href="/dashboard"
+                  className="button-2"
+                >
+                  Get Started
+                </Link>
+              )
+            }
           </div>
       </main>
     </Layout>

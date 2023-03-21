@@ -39,7 +39,12 @@ function MyApp({
       supabaseClient={supabase}
       initialSession={pageProps.initialSession}
     >
-      {isLoading ? <Loading /> : <Component {...pageProps} />}
+      {isLoading ?
+        <Loading /> :
+        <>
+          <Component {...pageProps} />
+        </>
+      }
     </SessionContextProvider>
   );
 }

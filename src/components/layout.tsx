@@ -1,83 +1,100 @@
-import React from 'react';
+import { ReactNode, FC, useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Image from 'next/image';
 
 interface ComponentProps {
-  children: React.ReactNode;
+    children: ReactNode;
 }
 
-const Layout: React.FC<ComponentProps> = ({ children }) => {
-  const session = useSession();
-  const supabase = useSupabaseClient();
-  const router = useRouter();
-  const scopes = [
-    'https://www.googleapis.com/auth/calendar',
-    'https://www.googleapis.com/auth/calendar.events',
-    'https://www.googleapis.com/auth/tasks',
-    'https://www.googleapis.com/auth/tasks.readonly',
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile',
-  ];
-  return (
-    <div className='bg-gradient-to-br from-indigo-50 to-cyan-100 relative'>
-      <Head>
-        <title>Arjun | WhatsApp Assistant</title>
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-      <div className='fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100'></div>
-      <div className='absolute w-full h-screen bg-transparent'>
-        <div className='fixed top-0 w-full bg-white/0 z-30 transition-all'>
-          <div className='mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto'>
-            <Link className='flex items-center font-display text-2xl lg:text-3xl font-bold' href='/'>
-              {/* <img alt="Arjun logo" src="/logo.svg" decoding="async" className="mr-2 rounded-sm" loading="lazy" style={{ color: 'transparent' }} /> */}
-              Arjun
-            </Link>
-            <div>
-              <button
-                onClick={() =>
-                  !session
-                    ? router.push(
-                        `${
-                          process.env.NEXT_PUBLIC_SUPABASE_URL
-                        }/auth/v1/authorize?provider=google&scopes=${scopes.join(
-                          ' '
-                        )}&redirect_to=${location.protocol}//${
-                          location.host
-                        }/dashboard&prompt=consent&access_type=offline`
-                      )
-                    : supabase.auth.signOut()
-                }
-                className='button-1'
-                style={{ opacity: 1 }}
-              >
-                {!session ? 'Sign In' : 'Logout'}
-              </button>
-            </div>
-          </div>
-        </div>
+const Layout: FC<ComponentProps> = ({ children }) => {
+    const session = useSession();
+    const supabase = useSupabaseClient();
+    const router = useRouter();
+
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            if (scrollTop > 0) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+        document.addEventListener("scroll", handleScroll);
+        return () => {
+            document.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    return (
+        <div className="bg-gradient-to-br from-indigo-50 to-cyan-100 relative">
+            <Head>
+                <title>Arjun | WhatsApp Assistant</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+
+            <div className='fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100'></div>
+
+            <div className='absolute w-full h-screen bg-transparent'>
+                <div className={`fixed top-0 w-full ${isScrolled ? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl' : 'bg-white/0'} z-30 transition-all`}>
+                    <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
+                        <Link className="flex items-center font-display text-2xl" href="/">
+                            <Image alt="Arjun logo" src="/logo.png" className="mr-2 rounded-sm" height={30} width={30} loading="lazy" style={{ color: 'transparent' }} />
+                            <p>Arjun</p>
+                        </Link>
+                        <div>
+                            <button onClick={() => (!session ? router.push("/dashboard") : supabase.auth.signOut())} className='button-1' style={{ opacity: 1 }}>{!session ? "Sign In" : "Logout"}</button>
+                        </div>
+                    </div>
+                </div>
 
         {children}
 
-        <div className='w-full border-t border-gray-200 bg-white py-5 text-center self-end'>
-          <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center'>
-            <div className='text-center sm:text-left'>
-              <p className='text-sm'>&copy; 2023 Arjun. All rights reserved.</p>
-            </div>
-            <div className='mt-4 sm:mt-0'>
-              <Link
-                href='/privacy-policy'
-                className='text-gray-800 hover:text-gray-300 ml-4'
-              >
-                Privacy Policy
-              </Link>
-              <a
-                href='mailto:shubhamtiwari06112004+arjun@gmail.com'
-                className='text-gray-800 hover:text-gray-300 ml-4'
-              >
-                Contact Us
-              </a>
+                <div className="w-full border-t border-gray-200 bg-white py-5 text-center self-end">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center">
+                        <div className="text-center sm:text-left">
+                            <p className="text-sm">
+                                &copy; 2023 Arjun. All rights reserved.
+                            </p>
+                        </div>
+                        <div className="mt-4 sm:mt-0">
+                            <Link
+                                href="/privacy-policy"
+                                className="text-gray-800 hover:text-gray-500 ml-4"
+                            >
+                                Privacy Policy
+                            </Link>
+                            <Link
+                                href="/changelog"
+                                className="text-gray-800 hover:text-gray-500 ml-4"
+                            >
+                                Changelog
+                            </Link>
+                            <a
+                                href="mailto:shubham@visualbrahma.tech"
+                                className="text-gray-800 hover:text-gray-500 ml-4"
+                            >
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center sm:justify-start">
+                        <p className="text-sm">
+                            Design inspired from
+                        </p>
+                        <Link
+                            href="https://precedent.dev"
+                            className="text-blue-800 hover:text-blue-500 ml-1"
+                        >
+                            precedent.dev
+                        </Link>
+                    </div>
+                </div>
             </div>
           </div>
         </div>
