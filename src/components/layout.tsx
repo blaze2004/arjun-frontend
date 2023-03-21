@@ -52,6 +52,7 @@ const Layout: FC<ComponentProps> = ({ children }) => {
                         </div>
                     </div>
                 </div>
+             </div>
 
         {children}
 
@@ -95,10 +96,6 @@ const Layout: FC<ComponentProps> = ({ children }) => {
                         </Link>
                     </div>
                 </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
