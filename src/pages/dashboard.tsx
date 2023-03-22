@@ -19,13 +19,13 @@ const Dashboard = () => {
 
   return (
     <Layout>
-      <main className='flex w-full flex-col items-center justify-center py-32 h-screen'>
+      <main className='flex w-full flex-col items-center justify-center py-32 min-h-screen'>
         {!session ? (
-          <div className='flex items-center px-5 xl:px-0 text-center flex-col'>
-            <p className='bg-gradient-to-br mb-5 from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold text-transparent drop-shadow-sm md:text-6xl'>
+          <div className='flex items-center px-2 xl:px-0 text-center flex-col'>
+            <p className='bg-gradient-to-br mb-6 from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold text-transparent drop-shadow-sm pb-2 md:text-6xl'>
               Please login first
             </p>
-            <p className='mt-6 text-gray-500 w-[50%] text-sm lg:text-xl text-decoration-italic'>
+            <p className='mt-5 text-gray-500 text-sm lg:text-xl text-decoration-italic sm:w-[50%]'>
               Calendar and Google Task permissions are compulsory for Arjun to
               be able to manage your schedule. We don&apos;t do anything with
               your calendar and only perform operations which you ask Arjun to

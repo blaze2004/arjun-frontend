@@ -8,7 +8,7 @@ const LandingPage = () => {
 
   return (
     <Layout>
-      <main className='flex w-full flex-col items-center justify-center py-32 h-screen'>
+      <main className='flex w-full flex-col items-center justify-center py-32 min-h-screen'>
         <div className='mb-6 mt-6'>
           <h1
             className='bg-gradient-to-br from-blue-400 mb-4 to-green-500 bg-clip-text text-center font-display text-4xl font-bold text-transparent drop-shadow-sm md:text-7xl'
