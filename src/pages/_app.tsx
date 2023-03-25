@@ -5,6 +5,7 @@ import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Loading from "../components/loading";
+import { Analytics } from '@vercel/analytics/react';
 
 function MyApp({
   Component,
@@ -43,6 +44,7 @@ function MyApp({
         <Loading /> :
         <>
           <Component {...pageProps} />
+          <Analytics />
         </>
       }
     </SessionContextProvider>
