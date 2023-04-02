@@ -20,7 +20,7 @@ const PrivacyPolicy=() => {
                             We take the security of your data very seriously and have implemented appropriate technical and organizational measures to protect your personal information.
                             However, we cannot guarantee the security of your data when transmitted over the internet or when stored on servers not controlled by us. <br /><br />
                             Arjun complies with the Google API Services User Data Policy, including the Limited Use requirements. 
-                            \By using Arjun, you consent to the terms and conditions of this policy.
+                            By using Arjun, you consent to the terms and conditions of this policy.
                             Arjun&apos;s use and transfer of information received from Google APIs to any other app will adhere to the Google API Services User Data Policy, including the Limited Use requirements.
                             You can access the Google API Services User Data Policy at any time from <a className="text-blue-800 hover:text-blue-500" href="https://developers.google.com/terms/api-services-user-data-policy">here</a>.
                             We reserve the right to modify this Privacy Policy at any time, so please review it frequently.
