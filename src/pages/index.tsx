@@ -1,7 +1,7 @@
 import Layout from '@/components/layout';
 import { useSession } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
-import waitlist from '@zootools/waitlist-js';
+// import waitlist from '@zootools/waitlist-js';
 
 const LandingPage = () => {
   const session = useSession();
@@ -33,7 +33,7 @@ const LandingPage = () => {
             className='mx-auto mt-6 flex items-center justify-center space-x-5'
             style={{ opacity: 1, transform: 'none' }}
           >
-            {!session ? (
+            {/* {!session ? (
               <button
                 onClick={() => waitlist.openPopup("OUX9PACcT4P8hGW8uztt")}
                 className="button-2"
@@ -41,15 +41,15 @@ const LandingPage = () => {
                 Join the waitlist
               </button>
             ) :
-              (
+              ( */}
                 <Link
                   href="/dashboard"
                   className="button-2"
                 >
                   Get Started
                 </Link>
-              )
-            }
+              {/* )
+            } */}
           </div>
       </main>
     </Layout>

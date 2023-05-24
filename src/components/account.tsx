@@ -9,8 +9,8 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 import { Database } from "@/types/database.types";
 import { useRouter } from "next/router";
-import { Profiles, UserProfile, Testers } from "@/types";
-import waitlist from "@zootools/waitlist-js";
+import { Profiles, UserProfile } from "@/types";
+// import waitlist from "@zootools/waitlist-js";
 
 const Account = ({ session }: { session: Session }) => {
   const arjunWhatsAppNumber = process.env.NEXT_PUBLIC_ARJUN_WHATSAPP_NUMBER;
@@ -25,7 +25,7 @@ const Account = ({ session }: { session: Session }) => {
   const [refreshToken, setRefreshToken] = useState<
     Profiles["google_refresh_token"]
   >(null);
-  const [waitlistStatus, setWaitlistStatus] = useState<boolean>(false);
+  // const [waitlistStatus, setWaitlistStatus] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -43,21 +43,21 @@ const Account = ({ session }: { session: Session }) => {
         return;
       }
 
-      let waitlistQuery = await supabase
-        .from("testers")
-        .select(`email`)
-        .eq("email", session.user.email)
-        .single();
+      // let waitlistQuery = await supabase
+      //   .from("testers")
+      //   .select(`email`)
+      //   .eq("email", session.user.email)
+      //   .single();
 
-      if (waitlistQuery.error && waitlistQuery.status !== 406) {
-        throw waitlistQuery.error;
-      }
+      // if (waitlistQuery.error && waitlistQuery.status !== 406) {
+      //   throw waitlistQuery.error;
+      // }
 
-      if (waitlistQuery.data) {
-        setWaitlistStatus(true);
-      } else {
-        return;
-      }
+      // if (waitlistQuery.data) {
+      //   setWaitlistStatus(true);
+      // } else {
+      //   return;
+      // }
 
       let { data, error, status } = await supabase
         .from("profiles")
@@ -141,39 +141,39 @@ const Account = ({ session }: { session: Session }) => {
     }
   }
 
-  if (!waitlistStatus) {
-    return (
-      <div className="max-w-xl px-5 xl:px-0 flex-col">
-        <p
-          className="mt-6 text-gray-500 text-justify text-decoration-italic mb-2"
-          style={{ opacity: 1 }}
-        >
-          <span
-            style={{
-              display: "inline-block",
-              verticalAlign: "top",
-              textDecoration: "inherit",
-              maxWidth: "541px"
-            }}
-          >
-            We apologize, but at this time you do not have access to Arjun.
-            However, we would be happy to add you to our waitlist to gain access
-            to the superpowers of Arjun. If you have already joined the
-            waitlist, kindly await our email notification. Thank you for your
-            patience and understanding.
-          </span>
-        </p>
-        <div className="flex items-center justify-center">
-          <button
-            onClick={() => waitlist.openPopup("OUX9PACcT4P8hGW8uztt")}
-            className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
-          >
-            Join the waitlist
-          </button>
-        </div>
-      </div>
-    );
-  }
+  // if (!waitlistStatus) {
+  //   return (
+  //     <div className="max-w-xl px-5 xl:px-0 flex-col">
+  //       <p
+  //         className="mt-6 text-gray-500 text-justify text-decoration-italic mb-2"
+  //         style={{ opacity: 1 }}
+  //       >
+  //         <span
+  //           style={{
+  //             display: "inline-block",
+  //             verticalAlign: "top",
+  //             textDecoration: "inherit",
+  //             maxWidth: "541px"
+  //           }}
+  //         >
+  //           We apologize, but at this time you do not have access to Arjun.
+  //           However, we would be happy to add you to our waitlist to gain access
+  //           to the superpowers of Arjun. If you have already joined the
+  //           waitlist, kindly await our email notification. Thank you for your
+  //           patience and understanding.
+  //         </span>
+  //       </p>
+  //       <div className="flex items-center justify-center">
+  //         <button
+  //           onClick={() => waitlist.openPopup("OUX9PACcT4P8hGW8uztt")}
+  //           className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
+  //         >
+  //           Join the waitlist
+  //         </button>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="max-w-xl px-5 xl:px-0">
