@@ -36,6 +36,7 @@ const Layout: FC<ComponentProps>=({ children }) => {
             <Head>
                 <title>Arjun | WhatsApp Assistant</title>
                 <link rel="icon" href="/favicon.ico" />
+                <meta name="description" content="Experience the power of ChatGPT on WhatsApp for intelligent conversation and effortless schedule management. Chat with our AI-powered assistant to organize your tasks, appointments, and more."></meta>
             </Head>
 
             <div className='fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100'></div>
