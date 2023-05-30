@@ -21,7 +21,7 @@ const LandingPage = () => {
             </div>
           </div>
           <p
-            className='text-center text-gray-500 mx-2 md:text-xl'
+            className='text-center text-gray-500 mx-2 md:text-xl max-w-screen-lg'
           >
               Manage your schedule from WhatsApp while chatting with Arjun and experience the power of ChatGPT on WhatsApp.
           </p>
