@@ -37,6 +37,15 @@ const Layout: FC<ComponentProps>=({ children }) => {
                 <title>Arjun | WhatsApp Assistant</title>
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="description" content="Experience the power of ChatGPT on WhatsApp for intelligent conversation and effortless schedule management. Chat with our AI-powered assistant to organize your tasks, appointments, and more."></meta>
+                <meta property="og:title" content="Arjun - ChatGPT WhatsApp Bot" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="/logo.png" />
+                <meta property="og:url" content="https://arjun.visualbrahma.tech" />
+                <meta property="og:description" content="Experience the power of ChatGPT on WhatsApp for intelligent conversation and effortless schedule management. Chat with our AI-powered assistant to organize your tasks, appointments, and more." />
+                <meta name="theme-color" content="#6B13FA" />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+                <link rel="apple-touch-icon" href="/logo.png" />
+                <link rel="canonical" href="https://arjun.visualbrahma.tech" />
             </Head>
 
             <div className='fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100'></div>
