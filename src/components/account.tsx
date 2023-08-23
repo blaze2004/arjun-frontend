@@ -208,7 +208,7 @@ const Account = ({ session }: { session: Session }) => {
         </span>
       </p>
       <div className='rounded-full text-center py-0.5 px-5 mt-5 mx-2 text-[12px] lg:text-sm text-red-800 ring-1 ring-red-500'>
-        Arjun is currently unavailable, we are working on something which will make you more productive. <br/>Stay tuned for further updates.
+        Arjun is currently unavailable, we are working on something which will make you more productive. Stay tuned for further updates.
       </div>
       <div className="m-4">
         <label className="block text-gray-700 font-bold mb-2">
